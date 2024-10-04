@@ -1,6 +1,7 @@
 import random
 from math import gcd
 
+
 # Function to compute modular inverse
 def mod_inverse(e, phi):
     # Extended Euclidean Algorithm
@@ -16,6 +17,7 @@ def mod_inverse(e, phi):
         x2 += phi
     return x2
 
+
 # Function to check if a number is prime
 def is_prime(num):
     if num <= 1:
@@ -25,10 +27,12 @@ def is_prime(num):
             return False
     return True
 
+
 # Function to generate a random prime number
 def generate_prime(start, end):
     primes = [i for i in range(start, end) if is_prime(i)]
     return random.choice(primes)
+
 
 # Key generation
 def generate_keys():
@@ -50,17 +54,20 @@ def generate_keys():
     # Public key (e, n) and Private key (d, n)
     return ((e, n), (d, n))
 
+
 # Encryption: C = M^e mod n
 def encrypt(plain_text, public_key):
     e, n = public_key
     cipher_text = [(ord(char) ** e) % n for char in plain_text]
     return cipher_text
 
+
 # Decryption: M = C^d mod n
 def decrypt(cipher_text, private_key):
     d, n = private_key
-    plain_text = [chr((char ** d) % n) for char in cipher_text]
-    return ''.join(plain_text)
+    plain_text = [chr((char**d) % n) for char in cipher_text]
+    return "".join(plain_text)
+
 
 # Main Program
 if __name__ == "__main__":
@@ -70,7 +77,7 @@ if __name__ == "__main__":
     print("Private Key:", private_key)
 
     message = input("\nEnter a message to encrypt: ")
-    
+
     # Encrypt the message
     encrypted_msg = encrypt(message, public_key)
     print("\nEncrypted message:", encrypted_msg)
